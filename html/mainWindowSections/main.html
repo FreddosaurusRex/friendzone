@@ -1,0 +1,51 @@
+<div >
+
+  <div class="container main_container" >
+
+    <div class="row action_row">
+
+      <div class="col-lg-6 vid_col" id="video_container" >
+        <div class="row video_view_row">
+          <video id="camera-stream" width="500" autoplay></video>
+            <button class="btn btn-lg " ng-click="main_win_ctrl.startStream(main_win_ctrl.video_streams)">Start Stream</button>
+            <button class="btn btn-lg " ng-click="main_win_ctrl.stopStream()">Stop Stream</button>
+          </div>
+
+          <div class="row video_nav_row">
+            <div class="col-lg-12 video_nav_col">
+              <ul class="nav nav-tabs">
+                <li ng-repeat="video in main_win_ctrl.video_streams" ng-bind="video" role="presentation" class="active"><a href="#"></a></li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-lg-6 friend_col">
+
+          <div class="friend_list" ng-repeat="friend in main_win_ctrl.user_friends">
+
+            <div class="container friend_container">
+
+              <div class="col-lg-6">
+                <div class="row friend_name_row">
+                  <div class="col-lg-12 friend_screenname_col" ng-bind="friend.screenname"></div>
+                </div>
+
+                <div class="status_row">
+                  <div class="col-lg-6 status_col" ng-bind="friend.online"></div>
+                  <div class="col-lg-6 status_col" ng-bind="friend.status"></div>
+                </div>
+              </div>
+
+              <div class="col-lg-6 friend_icon_col">
+                <a href="" ng-click="main_win_ctrl.addFriendVideo(friend.screenname)" class="thumbnail">
+                  <img ng-src="{{friend.icon}}" alt="icon"></img>
+                </a>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
