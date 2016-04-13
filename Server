@@ -1,0 +1,32 @@
+// curently being developed please tell me if im doing this wrong
+var express = require('express');// obtaining express
+var url = require('url');// obtaining url
+var mongoose = require('mongoose'); // obtaining mongoose
+// database connection error
+mongoose.connect('mongoDB://localhost/FriendZoneDB',function(error){
+    if(error){
+      console.log(error);
+    }
+});
+
+//Schema
+var Schema = mongoose.Schema;
+var UserSchema = new Schema({
+  UserName: String,
+  Pass:String,
+  email:String
+});
+//var user = mongoose.model('user', UserSchema)
+//functions
+app.get('/Password', function(req,res){
+  var temp =  user.findOne({'password': UserName});
+  var url_parts = url.query(req.url, true);
+  var query = url_parts.query;
+
+  if(query.password != temp){
+    var match = false;
+  }else{
+    var match = true;
+  }
+  res.send(match);
+});
