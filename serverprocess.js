@@ -37,7 +37,7 @@ var authenticate = mongoose.model('authenticate', authenticateSchema);
 //functions
 app.get('/password', function(req,res){
   useraccount.findOne({username: req.params.username}, 'check password', function (err, user) {
-    if (err) return handleError(err);
+    if (err) res.send(false);
     console.log('Returned ' + user.username);
     if(user.password == req.params.password)
     {
@@ -54,7 +54,7 @@ app.get('/password', function(req,res){
 
 app.get('/username',function(req,res){
   useraccount.findOne({username: req.params.username}, 'check password', function (err, user) {
-    if (err) return handleError(err);
+    if (err) res.send(false);
     console.log('Returned ' + user.username);
     res.send(true);
   });
@@ -71,14 +71,14 @@ app.get('/icon_list', function(req,res){
 
 app.get('/friends', function(req,res){
   useraccount.findOne({username: req.params.username}, 'check password', function (err, user) {
-    if (err) return handleError(err);
+    if (err) res.send(null);
     res.send(user.friendlist);
   });
 });
 
 app.get('ignoredList', function(req,res){
   useraccount.findOne({username: req.params.username}, 'check password', function (err, user) {
-    if (err) return handleError(err);
+    if (err) res.send(null);
     res.send(user.ignorelist);
   });
 });
@@ -93,11 +93,8 @@ app.get('/user_profile_change',function(req,res){
 });
 
 app.get('/friend_video', function(req, res){
-
-  var url_parts = url.query(req.url, true);
-  var query = url_parts.query;
-
-  var temp = user.findOne({'UserName', query});
-
-  res.send(temp.SocketNum);
+  useraccount.findOne({username: req.params.username}, 'check password', function (err, user) {
+    if (err) res.send(null);
+    res.send(user.socket);
+  });
 });
